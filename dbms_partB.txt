@@ -62,49 +62,48 @@ CREATE TABLE BORROW (
 
 
 -- Inserting data into BRANCH table
-INSERT INTO BRANCH (Branchid, Branchname, HOD) VALUES
-(1, 'Computer Science', 'Dr. Sharma'),
-(2, 'Electronics', 'Dr. Verma'),
-(3, 'Mechanical', 'Dr. Patil'),
-(4, 'Civil', 'Dr. Singh'),
-(5, 'Electrical', 'Dr. Rao'),
-(6, 'Chemical', 'Dr. Iyer');
+INSERT INTO BRANCH (Branchid, Branchname, HOD) VALUES(2, 'Electronics', 'Dr. Verma');
+INSERT INTO BRANCH (Branchid, Branchname, HOD) VALUES(3, 'Mechanical', 'Dr. Patil');
+INSERT INTO BRANCH (Branchid, Branchname, HOD) VALUES(4, 'Civil', 'Dr. Singh');
+INSERT INTO BRANCH (Branchid, Branchname, HOD) VALUES(5, 'Electrical', 'Dr. Rao');
+INSERT INTO BRANCH (Branchid, Branchname, HOD) VALUES(6, 'Chemical', 'Dr. Iyer');
 
 -- Inserting data into AUTHOR table
-INSERT INTO AUTHOR (Authorid, Authorname, Country, Age) VALUES
-(1, 'Amitabh Bachchan', 'India', 60),
-(2, 'Rajesh Khanna', 'India', 55),
-(3, 'Priya Kapoor', 'India', 42),
-(4, 'Arun Reddy', 'India', 48),
-(5, 'Sunita Sharma', 'India', 36),
-(6, 'Meera Patel', 'India', 39);
+
+INSERT INTO AUTHOR (Authorid, Authorname, Country, Age) VALUES(1, 'Amitabh Bachchan', 'India', 60);
+INSERT INTO AUTHOR (Authorid, Authorname, Country, Age) VALUES (2, 'Rajesh Khanna', 'India', 55);
+INSERT INTO AUTHOR (Authorid, Authorname, Country, Age) VALUES (3, 'Priya Kapoor', 'India', 42);
+INSERT INTO AUTHOR (Authorid, Authorname, Country, Age) VALUES(4, 'Arun Reddy', 'India', 48);
+INSERT INTO AUTHOR (Authorid, Authorname, Country, Age) VALUES(5, 'Sunita Sharma', 'India', 36);
+INSERT INTO AUTHOR (Authorid, Authorname, Country, Age) VALUES(6, 'Meera Patel', 'India', 39);
 
 -- Inserting data into STUDENT table
-INSERT INTO STUDENT (USN, Name, Address, Branchid, Sem) VALUES
-('1MS201', 'Rohit Sharma', '123 MG Road, Bangalore, India', 1, 3),
-('1MS202', 'Anita Verma', '456 Sector 17, Chandigarh, India', 2, 2),
-('1MS203', 'Vijay Patil', '789 Lokhandwala, Mumbai, India', 3, 4),
-('1MS204', 'Sneha Singh', '321 Civil Lines, Allahabad, India', 4, 1),
-('1MS205', 'Lakshmi Rao', '654 Banjara Hills, Hyderabad, India', 5, 3),
-('1MS206', 'Rahul Iyer', '987 T Nagar, Chennai, India', 6, 2);
+
+INSERT INTO STUDENT (USN, Name, Address, Branchid, Sem) VALUES ('1MS201', 'Rohit Sharma', '123 MG Road, Bangalore, India', 1, 3);
+INSERT INTO STUDENT (USN, Name, Address, Branchid, Sem) VALUES ('1MS202', 'Anita Verma', '456 Sector 17, Chandigarh, India', 2, 2);
+INSERT INTO STUDENT (USN, Name, Address, Branchid, Sem) VALUES ('1MS203', 'Vijay Patil', '789 Lokhandwala, Mumbai, India', 3, 4);
+INSERT INTO STUDENT (USN, Name, Address, Branchid, Sem) VALUES ('1MS204', 'Sneha Singh', '321 Civil Lines, Allahabad, India', 4, 1);
+INSERT INTO STUDENT (USN, Name, Address, Branchid, Sem) VALUES ('1MS205', 'Lakshmi Rao', '654 Banjara Hills, Hyderabad, India', 5, 3);
+INSERT INTO STUDENT (USN, Name, Address, Branchid, Sem) VALUES ('1MS206', 'Rahul Iyer', '987 T Nagar, Chennai, India', 6, 2);
 
 -- Inserting data into BOOK table
-INSERT INTO BOOK (Bookid, Bookname, Authorid, Publisher, Branchid) VALUES
-(101, 'Introduction to Programming', 1, 'ABC Publications', 1),
-(102, 'Electronics Fundamentals', 2, 'XYZ Books', 2),
-(103, 'Mechanical Engineering Basics', 3, '123 Publishers', 3),
-(104, 'Civil Engineering Structures', 4, '456 Printers', 4),
-(105, 'Electrical Systems Design', 5, '789 Publishing', 5),
-(106, 'Chemical Processes', 6, '999 Press', 6);
+
+INSERT INTO BOOK (Bookid, Bookname, Authorid, Publisher, Branchid) VALUES (101, 'Introduction to Programming', 1, 'ABC Publications', 1);
+INSERT INTO BOOK (Bookid, Bookname, Authorid, Publisher, Branchid) VALUES (102, 'Electronics Fundamentals', 2, 'XYZ Books', 2);
+INSERT INTO BOOK (Bookid, Bookname, Authorid, Publisher, Branchid) VALUES (103, 'Mechanical Engineering Basics', 3, '123 Publishers', 3);
+INSERT INTO BOOK (Bookid, Bookname, Authorid, Publisher, Branchid) VALUES (104, 'Civil Engineering Structures', 4, '456 Printers', 4);
+INSERT INTO BOOK (Bookid, Bookname, Authorid, Publisher, Branchid) VALUES (105, 'Electrical Systems Design', 5, '789 Publishing', 5);
+INSERT INTO BOOK (Bookid, Bookname, Authorid, Publisher, Branchid) VALUES (106, 'Chemical Processes', 6, '999 Press', 6);
+
 
 -- Inserting data into BORROW table
-INSERT INTO BORROW (USN, Bookid, Borrowed_Date) VALUES
-('1MS201', 101, '2024-07-01'),
-('1MS202', 102, '2024-07-02'),
-('1MS203', 103, '2024-07-03'),
-('1MS204', 104, '2024-07-04'),
-('1MS205', 105, '2024-07-05'),
-('1MS206', 106, '2024-07-06');
+
+INSERT INTO BORROW (USN, Bookid, Borrowed_Date) VALUES ('1MS201', 101, '01-July-2024');
+INSERT INTO BORROW (USN, Bookid, Borrowed_Date) VALUES ('1MS202', 102, '02-July-2024');
+INSERT INTO BORROW (USN, Bookid, Borrowed_Date) VALUES ('1MS203', 103, '03-July-2024');
+INSERT INTO BORROW (USN, Bookid, Borrowed_Date) VALUES ('1MS204', 104, '04-July-2024');
+INSERT INTO BORROW (USN, Bookid, Borrowed_Date) VALUES ('1MS205', 105, '05-July-2024');
+INSERT INTO BORROW (USN, Bookid, Borrowed_Date) VALUES ('1MS206', 106, '06-July-2024');
 
 
 
