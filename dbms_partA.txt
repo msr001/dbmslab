@@ -1,0 +1,241 @@
+select username from all_users -----> view all data bases
+
+
+select table_name from user_tables ------> all tables under user's database
+
+
+create user user_name identified by pass_word -----------> to create database/ users
+
+
+
+
+
+
+CREATE TABLE department (
+    dname VARCHAR2(10) NOT NULL,
+    dnumber NUMBER(4) PRIMARY KEY,
+    mgrssn NUMBER(4) NOT NULL,
+    msrssardate DATE NOT NULL
+);
+
+CREATE TABLE employee (
+    fname VARCHAR2(10) NOT NULL,
+    mname VARCHAR2(10) NOT NULL,
+    lname VARCHAR2(10) NOT NULL,
+    ssn NUMBER(4) PRIMARY KEY,
+    bdate DATE NOT NULL,
+    address VARCHAR2(30) NOT NULL,
+    sex VARCHAR2(1) NOT NULL CHECK (sex IN ('m', 'f')),
+    salary NUMBER(9,1) NOT NULL,
+    superssn NUMBER(6) NOT NULL,
+    dnumber NUMBER(4) REFERENCES department(dnumber) NOT NULL
+);
+
+CREATE TABLE department_location (
+    dnumber NUMBER(4) REFERENCES department(dnumber) NOT NULL
+);
+
+CREATE TABLE project (
+    pname VARCHAR2(30) NOT NULL,
+    pnumber NUMBER(4) PRIMARY KEY,
+    ploction VARCHAR2(30) NOT NULL,
+    dnumber NUMBER(4) REFERENCES department(dnumber) NOT NULL
+);
+
+CREATE TABLE works_on (
+    ssn NUMBER(4) NOT NULL,
+    pnumber NUMBER(4) REFERENCES project(pnumber) NOT NULL,
+    hours NUMBER(4,2) NOT NULL
+);
+
+
+
+-- Insert into department
+INSERT INTO department (dname, dnumber, mgrssn, msrssardate)
+VALUES ('HR', 1, 1001, TO_DATE('2010-01-01', 'YYYY-MM-DD'));
+
+INSERT INTO department (dname, dnumber, mgrssn, msrssardate)
+VALUES ('IT', 2, 1002, TO_DATE('2012-05-15', 'YYYY-MM-DD'));
+
+INSERT INTO department (dname, dnumber, mgrssn, msrssardate)
+VALUES ('Finance', 3, 1003, TO_DATE('2013-07-21', 'YYYY-MM-DD'));
+
+INSERT INTO department (dname, dnumber, mgrssn, msrssardate)
+VALUES ('Marketing', 4, 1004, TO_DATE('2015-11-30', 'YYYY-MM-DD'));
+
+INSERT INTO department (dname, dnumber, mgrssn, msrssardate)
+VALUES ('R&D', 5, 1005, TO_DATE('2018-04-10', 'YYYY-MM-DD'));
+
+select * from department
+
+select table_name from user_tables
+
+update department set dname = 'Accounts' where dnumber  = 4
+update department set dname = 'Research' where dnumber = 5
+
+
+
+-- Insert into employee
+INSERT INTO employee (fname, mname, lname, ssn, bdate, address, sex, salary, superssn, dnumber)
+VALUES ('Arjun', 'Kumar', 'Sharma', 2001, TO_DATE('1990-03-15', 'YYYY-MM-DD'), '1234 MG Road, Bangalore', 'm', 50000.0, 1001, 1);
+
+INSERT INTO employee (fname, mname, lname, ssn, bdate, address, sex, salary, superssn, dnumber)
+VALUES ('Meera', 'Rani', 'Patel', 2002, TO_DATE('1985-06-25', 'YYYY-MM-DD'), '5678 Nehru Street, Mumbai', 'f', 55000.0, 1002, 2);
+
+INSERT INTO employee (fname, mname, lname, ssn, bdate, address, sex, salary, superssn, dnumber)
+VALUES ('Ravi', 'Raj', 'Verma', 2003, TO_DATE('1988-09-12', 'YYYY-MM-DD'), '7890 Gandhi Marg, Delhi', 'm', 60000.0, 1003, 3);
+
+
+INSERT INTO employee (fname, mname, lname, ssn, bdate, address, sex, salary, superssn, dnumber)
+VALUES ('Sneha', 'Amit', 'Das', 2004, TO_DATE('1992-02-05', 'YYYY-MM-DD'), '3456 Ashok Nagar, Chennai', 'f', 48000.0, 1004, 4);
+
+INSERT INTO employee (fname, mname, lname, ssn, bdate, address, sex, salary, superssn, dnumber)
+VALUES ('Vikram', 'S', 'Iyer', 2005, TO_DATE('1985-11-23', 'YYYY-MM-DD'), '9876 Velachery, Chennai', 'm', 70000.0, 1005, 5);
+
+INSERT INTO employee (fname, mname, lname, ssn, bdate, address, sex, salary, superssn, dnumber)
+VALUES ('Pooja', 'R', 'Naik', 2006, TO_DATE('1991-04-14', 'YYYY-MM-DD'), '6543 Lajpat Nagar, Pune', 'f', 52000.0, 1001, 1);
+
+INSERT INTO employee (fname, mname, lname, ssn, bdate, address, sex, salary, superssn, dnumber)
+VALUES ('Rajesh', 'K', 'Mishra', 2007, TO_DATE('1987-08-19', 'YYYY-MM-DD'), '1122 Sector 15, Noida', 'm', 58000.0, 1002, 2);
+
+INSERT INTO employee (fname, mname, lname, ssn, bdate, address, sex, salary, superssn, dnumber)
+VALUES ('Anjali', 'N', 'Joshi', 2008, TO_DATE('1993-07-30', 'YYYY-MM-DD'), '3344 JP Nagar, Bangalore', 'f', 47000.0, 1003, 3);
+
+INSERT INTO employee (fname, mname, lname, ssn, bdate, address, sex, salary, superssn, dnumber)
+VALUES ('Suresh', 'P', 'Kumar', 2009, TO_DATE('1984-12-01', 'YYYY-MM-DD'), '5566 Marine Drive, Mumbai', 'm', 65000.0, 1004, 4);
+
+INSERT INTO employee (fname, mname, lname, ssn, bdate, address, sex, salary, superssn, dnumber)
+VALUES ('Kavita', 'L', 'Singh', 2010, TO_DATE('1990-11-18', 'YYYY-MM-DD'), '7788 Andheri West, Mumbai', 'f', 53000.0, 1005, 5);
+
+-- Insert additional entries into employee
+INSERT INTO employee (fname, mname, lname, ssn, bdate, address, sex, salary, superssn, dnumber)
+VALUES ('Gaurav', 'S', 'Mehta', 2011, TO_DATE('1989-05-10', 'YYYY-MM-DD'), '123 Sarjapur Road, Bangalore', 'm', 62000.0, 1001, 1);
+
+INSERT INTO employee (fname, mname, lname, ssn, bdate, address, sex, salary, superssn, dnumber)
+VALUES ('Ritika', 'P', 'Singh', 2012, TO_DATE('1991-08-20', 'YYYY-MM-DD'), '456 Whitefield, Bangalore', 'f', 58000.0, 1002, 1);
+
+
+
+
+
+5
+
+
+update employee set salary = salary+salary * 10/100 where dnumber  = (select dnumber from department where dname = 'Research')
+
+update employee set salary  = 50000 where dnumber = 5
+
+select max(salary)as "Max salary", min(salary)as"Min salary",sum(salary)as"total",avg(salary) from employee where dnumber = (select dnumber from department where dname = 'Accounts')
+
+
+6a
+select fname,salary from employee
+
+select dnumber from department
+
+
+select e.fname,e.salary from employee e where exists (select d.dnumber from department d where e.dnumber = 4) 
+
+6b
+select dname from department
+select count(*)from employee  
+
+select d.dname,count(*)as"number of employee " from employee e,department d where d.dnumber = e.dnumber group by d.dname having count(*)>3
+
+
+
+
+-- Insert into project
+INSERT INTO project (pname, pnumber, ploction, dnumber)
+VALUES ('AI Development', 101, 'Bangalore', 1);
+
+INSERT INTO project (pname, pnumber, ploction, dnumber)
+VALUES ('Web Portal', 102, 'Mumbai', 2);
+
+INSERT INTO project (pname, pnumber, ploction, dnumber)
+VALUES ('Mobile App', 103, 'Delhi', 3);
+
+INSERT INTO project (pname, pnumber, ploction, dnumber)
+VALUES ('Data Analysis', 104, 'Chennai', 4);
+
+INSERT INTO project (pname, pnumber, ploction, dnumber)
+VALUES ('Cloud Migration', 105, 'Chennai', 5);
+
+INSERT INTO project (pname, pnumber, ploction, dnumber)
+VALUES ('Cybersecurity', 106, 'Pune', 1);
+
+INSERT INTO project (pname, pnumber, ploction, dnumber)
+VALUES ('Blockchain', 107, 'Noida', 2);
+
+INSERT INTO project (pname, pnumber, ploction, dnumber)
+VALUES ('IoT Solutions', 108, 'Bangalore', 3);
+
+
+
+
+
+-- Insert into works_on
+INSERT INTO works_on (ssn, pnumber, hours)
+VALUES (2001, 101, 35.50);
+
+INSERT INTO works_on (ssn, pnumber, hours)
+VALUES (2002, 102, 40.00);
+
+INSERT INTO works_on (ssn, pnumber, hours)
+VALUES (2003, 103, 30.25);
+
+INSERT INTO works_on (ssn, pnumber, hours)
+VALUES (2004, 104, 20.00);
+
+INSERT INTO works_on (ssn, pnumber, hours)
+VALUES (2005, 105, 25.75);
+
+-- Insert additional entries into works_on
+INSERT INTO works_on (ssn, pnumber, hours)
+VALUES (2006, 106, 45.00);
+
+INSERT INTO works_on (ssn, pnumber, hours)
+VALUES (2007, 107, 38.00);
+
+INSERT INTO works_on (ssn, pnumber, hours)
+VALUES (2008, 108, 50.00);
+
+INSERT INTO works_on (ssn, pnumber, hours)
+VALUES (2009, 101, 22.50);
+
+INSERT INTO works_on (ssn, pnumber, hours)
+VALUES (2010, 102, 30.00);
+
+
+7a
+select * from works_on
+
+select pnumber, pname from project
+
+select p.pname,p.pnumber,count(*) from project p, works_on w where w.pnumber= p.pnumber
+group by p.pname,p.pnumber
+
+7b
+
+select fname,bdate from employee where bdate like '%90'
+
+
+
+8
+
+select dnumber,dname from department
+
+select dnumber from employee group by dnumber having count(*) >1
+
+select d.dnumber,d.dname,count(*)as"employee working" from employee e, department d where salary>40000 and d.dnumber = e.dnumber and d.dnumber in(select e.dnumber from employee group by e.dnumber having count(*)>3)group by d.dnumber,d.dname
+
+9
+
+select d.dname,count(*)as"number of employee " from employee e,department d where d.dnumber = e.dnumber group by d.dname having count(*)>3
+
+10
+create view salary as select fname,salary from employee where salary>50000 with check option
+select * from salary
+drop view salary
+
+update employee set salary = 94000 where ssn = 2002

@@ -1,0 +1,227 @@
+1
+
+select username from all_users -----> view all data bases
+
+
+select table_name from user_tables ------> all tables under user's database
+
+
+create user user_name identified by pass_word -----------> to create database/ users
+
+
+USE UniversityDB;
+
+-- Creating BRANCH table
+CREATE TABLE BRANCH (
+    Branchid INT PRIMARY KEY,
+    Branchname VARCHAR(100),
+    HOD VARCHAR(100)
+);
+
+-- Creating AUTHOR table
+CREATE TABLE AUTHOR (
+    Authorid INT PRIMARY KEY,
+    Authorname VARCHAR(100),
+    Country VARCHAR(50),
+    Age INT
+);
+
+-- Creating STUDENT table
+CREATE TABLE STUDENT (
+    USN VARCHAR(10) PRIMARY KEY,
+    Name VARCHAR(100),
+    Address VARCHAR(200),
+    Branchid INT,
+    Sem INT,
+    FOREIGN KEY (Branchid) REFERENCES BRANCH(Branchid)
+);
+
+-- Creating BOOK table
+CREATE TABLE BOOK (
+    Bookid INT PRIMARY KEY,
+    Bookname VARCHAR(100),
+    Authorid INT,
+    Publisher VARCHAR(100),
+    Branchid INT,
+    FOREIGN KEY (Authorid) REFERENCES AUTHOR(Authorid),
+    FOREIGN KEY (Branchid) REFERENCES BRANCH(Branchid)
+);
+
+
+-- Creating BORROW table
+CREATE TABLE BORROW (
+    USN VARCHAR(10),
+    Bookid INT,
+    Borrowed_Date DATE,
+    PRIMARY KEY (USN, Bookid),
+    FOREIGN KEY (USN) REFERENCES STUDENT(USN),
+    FOREIGN KEY (Bookid) REFERENCES BOOK(Bookid)
+);
+
+
+
+
+-- Inserting data into BRANCH table
+INSERT INTO BRANCH (Branchid, Branchname, HOD) VALUES
+(1, 'Computer Science', 'Dr. Sharma'),
+(2, 'Electronics', 'Dr. Verma'),
+(3, 'Mechanical', 'Dr. Patil'),
+(4, 'Civil', 'Dr. Singh'),
+(5, 'Electrical', 'Dr. Rao'),
+(6, 'Chemical', 'Dr. Iyer');
+
+-- Inserting data into AUTHOR table
+INSERT INTO AUTHOR (Authorid, Authorname, Country, Age) VALUES
+(1, 'Amitabh Bachchan', 'India', 60),
+(2, 'Rajesh Khanna', 'India', 55),
+(3, 'Priya Kapoor', 'India', 42),
+(4, 'Arun Reddy', 'India', 48),
+(5, 'Sunita Sharma', 'India', 36),
+(6, 'Meera Patel', 'India', 39);
+
+-- Inserting data into STUDENT table
+INSERT INTO STUDENT (USN, Name, Address, Branchid, Sem) VALUES
+('1MS201', 'Rohit Sharma', '123 MG Road, Bangalore, India', 1, 3),
+('1MS202', 'Anita Verma', '456 Sector 17, Chandigarh, India', 2, 2),
+('1MS203', 'Vijay Patil', '789 Lokhandwala, Mumbai, India', 3, 4),
+('1MS204', 'Sneha Singh', '321 Civil Lines, Allahabad, India', 4, 1),
+('1MS205', 'Lakshmi Rao', '654 Banjara Hills, Hyderabad, India', 5, 3),
+('1MS206', 'Rahul Iyer', '987 T Nagar, Chennai, India', 6, 2);
+
+-- Inserting data into BOOK table
+INSERT INTO BOOK (Bookid, Bookname, Authorid, Publisher, Branchid) VALUES
+(101, 'Introduction to Programming', 1, 'ABC Publications', 1),
+(102, 'Electronics Fundamentals', 2, 'XYZ Books', 2),
+(103, 'Mechanical Engineering Basics', 3, '123 Publishers', 3),
+(104, 'Civil Engineering Structures', 4, '456 Printers', 4),
+(105, 'Electrical Systems Design', 5, '789 Publishing', 5),
+(106, 'Chemical Processes', 6, '999 Press', 6);
+
+-- Inserting data into BORROW table
+INSERT INTO BORROW (USN, Bookid, Borrowed_Date) VALUES
+('1MS201', 101, '2024-07-01'),
+('1MS202', 102, '2024-07-02'),
+('1MS203', 103, '2024-07-03'),
+('1MS204', 104, '2024-07-04'),
+('1MS205', 105, '2024-07-05'),
+('1MS206', 106, '2024-07-06');
+
+
+
+
+
+2a
+SELECT * FROM STUDENT
+WHERE Sem = 2 AND Branchid = (
+    SELECT Branchid FROM BRANCH WHERE Branchname = 'BCA'
+);
+
+
+2b
+
+SELECT * FROM STUDENT
+WHERE USN NOT IN (SELECT USN FROM BORROW);
+
+3a
+
+
+SELECT s.USN, s.Name, b.Branchname, bk.Bookname, a.Authorname, br.Borrowed_Date
+FROM STUDENT s
+JOIN BRANCH b ON s.Branchid = b.Branchid
+JOIN BORROW br ON s.USN = br.USN
+JOIN BOOK bk ON br.Bookid = bk.Bookid
+JOIN AUTHOR a ON bk.Authorid = a.Authorid
+WHERE s.Sem = 2 AND b.Branchname = 'BCA';
+
+
+3b
+
+SELECT a.Authorname, COUNT(b.Bookid) AS NumberOfBooks
+FROM AUTHOR a
+JOIN BOOK b ON a.Authorid = b.Authorid
+GROUP BY a.Authorname;
+
+4a
+
+SELECT s.USN, s.Name, s.Address, s.Branchid, s.Sem
+FROM STUDENT s
+JOIN BORROW br ON s.USN = br.USN
+GROUP BY s.USN, s.Name, s.Address, s.Branchid, s.Sem
+HAVING COUNT(br.Bookid) > 2;
+
+
+4b
+
+
+SELECT s.USN, s.Name, s.Address, s.Branchid, s.Sem
+FROM STUDENT s
+JOIN BORROW br ON s.USN = br.USN
+JOIN BOOK bk ON br.Bookid = bk.Bookid
+GROUP BY s.USN, s.Name, s.Address, s.Branchid, s.Sem
+HAVING COUNT(DISTINCT bk.Authorid) > 1;
+
+
+5a
+
+
+SELECT Bookname FROM BOOK
+ORDER BY Bookname DESC;
+
+
+5b
+
+SELECT s.USN, s.Name, s.Address, s.Branchid, s.Sem
+FROM STUDENT s
+JOIN BORROW br ON s.USN = br.USN
+JOIN BOOK bk ON br.Bookid = bk.Bookid
+WHERE bk.Publisher = (
+    SELECT Publisher FROM BOOK GROUP BY Publisher HAVING COUNT(Bookid) = (SELECT COUNT(*) FROM BOOK)
+);
+
+
+
+6a
+
+UPDATE STUDENT
+SET GPA = (Mark1 + Mark2 + Mark3) / 3.0;
+
+
+6b
+
+SELECT * FROM STUDENT
+WHERE YEAR(Date_of_birth) = 2000;  -- Replace 2000 with the specific year.
+
+
+7a
+
+SELECT Name, GPA
+FROM STUDENT;
+
+
+
+7b
+
+SELECT Name, Date_of_birth
+FROM STUDENT
+WHERE YEAR(Date_of_birth) = 2000;  -- Replace 2000 with the desired year.
+
+
+8a
+
+SELECT *
+FROM STUDENT
+WHERE Branch = 'CSE';  -- Replace 'CSE' with the desired branch name.
+
+
+8b
+
+SELECT Branch, MAX(GPA) AS MaxGPA
+FROM STUDENT
+GROUP BY Branch;
+
+
+
+
+
+
+
