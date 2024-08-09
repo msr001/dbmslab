@@ -223,7 +223,7 @@ INSERT INTO STUDENTMMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3
 6a
 
 UPDATE STUDENT
-SET GPA = (Mark1 + Mark2 + Mark3) / 3.0;
+SET GPA = (Mark1 + Mark2 + Mark3) / 30;
 
 
 6b
