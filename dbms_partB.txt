@@ -170,12 +170,13 @@ ORDER BY Bookname DESC;
 5b
 
 
-SELECT s.USN, s.Name, s.Address, s.Branchid, s.Sem
-FROM STUDENT s
-JOIN BORROW br ON s.USN = br.USN
-GROUP BY s.USN, s.Name, s.Address, s.Branchid, s.Sem
-HAVING COUNT(br.Bookid) > =2;
 
+SELECT s.Name, COUNT(DISTINCT bk.Publisher) AS PublisherCount
+FROM STUDENT s, BORROW br, BOOK bk
+WHERE s.USN = br.USN
+  AND br.Bookid = bk.Bookid
+GROUP BY s.Name
+HAVING COUNT(DISTINCT bk.Publisher) > 1;
 
 ------> CREATE TABLE
 
