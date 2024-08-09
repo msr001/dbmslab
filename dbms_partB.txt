@@ -189,29 +189,29 @@ CREATE TABLE STUDENTMARKS (
     mark2 NUMBER(5,2),
     mark3 NUMBER(5,2),
     total NUMBER(5,2),
-    GPA NUMBER(3,2)
+    GPA NUMBER(5,2)
 );
 
 
 
 ------->STUDENT MARKS
 
-INSERT INTO STUDENTMMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
+INSERT INTO STUDENTMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
 ('1MS201', 'Rohit Sharma', TO_DATE('2000-05-15', 'YYYY-MM-DD'), 'Computer Science', 85.5, 78.0, 92.5, 256.0, 8.53);
 
-INSERT INTO STUDENTMMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
+INSERT INTO STUDENTMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
 ('1MS202', 'Anita Verma', TO_DATE('2001-01-20', 'YYYY-MM-DD'), 'Electronics', 79.0, 85.5, 88.5, 253.0, 8.43);
 
-INSERT INTO STUDENTMMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
+INSERT INTO STUDENTMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
 ('1MS203', 'Vijay Patil', TO_DATE('2000-09-10', 'YYYY-MM-DD'), 'Mechanical', 88.5, 82.0, 90.0, 260.5, 8.68);
 
-INSERT INTO STUDENTMMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
+INSERT INTO STUDENTMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
 ('1MS204', 'Sneha Singh', TO_DATE('2001-03-25', 'YYYY-MM-DD'), 'Civil', 91.0, 89.5, 87.0, 267.5, 8.92);
 
-INSERT INTO STUDENTMMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
+INSERT INTO STUDENTMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
 ('1MS205', 'Lakshmi Rao', TO_DATE('2000-11-05', 'YYYY-MM-DD'), 'Electrical', 84.5, 90.0, 85.5, 260.0, 8.67);
 
-INSERT INTO STUDENTMMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
+INSERT INTO STUDENTMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
 ('1MS206', 'Rahul Iyer', TO_DATE('2001-07-12', 'YYYY-MM-DD'), 'Chemical', 86.0, 83.5, 91.5, 261.0, 8.70);
 
 
@@ -220,22 +220,15 @@ INSERT INTO STUDENTMMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3
 
 
 
-6a
-
-UPDATE STUDENT
-SET GPA = (Mark1 + Mark2 + Mark3) / 30;
 
 
-6b
-
-SELECT * FROM STUDENT
-WHERE YEAR(Date_of_birth) = 2000;  -- Replace 2000 with the specific year.
 
 
 7a
 
-SELECT Name, GPA
-FROM STUDENT;
+
+UPDATE STUDENT
+SET GPA = (Mark1 + Mark2 + Mark3) / 30;
 
 
 
