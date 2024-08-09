@@ -169,14 +169,12 @@ ORDER BY Bookname DESC;
 
 5b
 
+
 SELECT s.USN, s.Name, s.Address, s.Branchid, s.Sem
 FROM STUDENT s
 JOIN BORROW br ON s.USN = br.USN
-JOIN BOOK bk ON br.Bookid = bk.Bookid
-WHERE bk.Publisher = (
-    SELECT Publisher FROM BOOK GROUP BY Publisher HAVING COUNT(Bookid) = (SELECT COUNT(*) FROM BOOK)
-);
-
+GROUP BY s.USN, s.Name, s.Address, s.Branchid, s.Sem
+HAVING COUNT(br.Bookid) > =2;
 
 
 ------> CREATE TABLE
