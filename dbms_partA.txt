@@ -118,15 +118,33 @@ VALUES ('Ritika', 'P', 'Singh', 2012, TO_DATE('1991-08-20', 'YYYY-MM-DD'), '456 
 
 
 
-5
+
+5. Execute the fallowing queries
+a. How the resulting salaries if every employee working on the ‘Research’Departments is given a 10%
+raise.
+b. Find the sum of the salaries of all employees of the ‘Accounts’ department, as well as the maximum
+salary, the minimum salary, and the average salary in this department
 
 
+5a
 update employee set salary = salary+salary * 10/100 where dnumber  = (select dnumber from department where dname = 'Research')
 
 update employee set salary  = 50000 where dnumber = 5
 
+5b
 select max(salary)as "Max salary", min(salary)as"Min salary",sum(salary)as"total",avg(salary) from employee where dnumber = (select dnumber from department where dname = 'Accounts')
 
+
+
+
+
+
+
+
+6. Execute the fallowing queries
+a. Retrieve the name of each employee Controlled by Department number 5 (use EXISTS operator).
+b. Retrieve the name of each dept and number of employees working in each Department which has at
+least 2 employees
 
 6a
 select fname,salary from employee
@@ -207,6 +225,20 @@ INSERT INTO works_on (ssn, pnumber, hours)
 VALUES (2010, 102, 30.00);
 
 
+
+
+
+
+
+
+
+
+7. Execute the fallowing queries
+a. For each project, retrieve the project number, the project name, and the number of employee who
+work on that project.(use GROUP BY)
+b. Retrieve the name of employees who born in the year 1990’s
+
+
 7a
 select * from works_on
 
@@ -221,6 +253,13 @@ select fname,bdate from employee where bdate like '%90'
 
 
 
+
+
+
+
+8. For each Department that has more than five employees, retrieve the department number and number of
+employees who are making salary more than 40000.
+
 8
 
 select dnumber,dname from department
@@ -229,9 +268,28 @@ select dnumber from employee group by dnumber having count(*) >1
 
 select d.dnumber,d.dname,count(*)as"employee working" from employee e, department d where salary>40000 and d.dnumber = e.dnumber and d.dnumber in(select e.dnumber from employee group by e.dnumber having count(*)>3)group by d.dnumber,d.dname
 
+
+
+
+
+
+
+
+9.For each project on which more than two employees work, retrieve the project number, project nameand
+the number of employees who work on that project.
+
+
 9
 
 select d.dname,count(*)as"number of employee " from employee e,department d where d.dnumber = e.dnumber group by d.dname having count(*)>3
+
+
+
+
+
+10. For a given set of relation tables perform the following: Creating Views (with and without check option),
+Dropping views, Selecting from a view
+
 
 10
 create view salary as select fname,salary from employee where salary>50000 with check option

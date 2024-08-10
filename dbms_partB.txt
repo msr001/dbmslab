@@ -107,6 +107,8 @@ INSERT INTO BORROW (USN, Bookid, Borrowed_Date) VALUES ('1MS206', 106, '06-July-
 
 
 
+2. a. List the details of Students who are all studying in 2nd sem BCA.
+b. List the students who are not borrowed any books.
 
 
 2a
@@ -120,6 +122,14 @@ WHERE Sem = 2 AND Branchid = (
 
 SELECT * FROM STUDENT
 WHERE USN NOT IN (SELECT USN FROM BORROW);
+
+
+
+
+
+3. a. Display the USN, Student name, Branch_name, Book_name, Author_name,
+Books_Borrowed_ Date of 2nd sem BCA Students who borrowed books.
+b. Display the number of books written by each Author.
 
 3a
 
@@ -139,6 +149,12 @@ SELECT a.Authorname, COUNT(b.Bookid) AS NumberOfBooks
 FROM AUTHOR a
 JOIN BOOK b ON a.Authorid = b.Authorid
 GROUP BY a.Authorname;
+
+
+
+
+4. a. Display the student details who borrowed more than two books.
+b.Display the student details who borrowed books of more than oneAuthor
 
 4a
 
@@ -160,8 +176,17 @@ GROUP BY s.USN, s.Name, s.Address, s.Branchid, s.Sem
 HAVING COUNT(DISTINCT bk.Authorid) > 1;
 
 
-5a
 
+
+
+
+
+5. a. Display the Book names in descending order of their names.
+b. List the details of students who borrowed the books which are all published by the same
+publisher
+
+
+5a
 
 SELECT Bookname FROM BOOK
 ORDER BY Bookname DESC;
@@ -169,14 +194,17 @@ ORDER BY Bookname DESC;
 
 5b
 
-
-
 SELECT s.Name, COUNT(DISTINCT bk.Publisher) AS PublisherCount
 FROM STUDENT s, BORROW br, BOOK bk
 WHERE s.USN = br.USN
   AND br.Bookid = bk.Bookid
 GROUP BY s.Name
 HAVING COUNT(DISTINCT bk.Publisher) > 1;
+
+
+
+
+
 
 ------> CREATE TABLE
 
@@ -189,29 +217,29 @@ CREATE TABLE STUDENTMARKS (
     mark2 NUMBER(5,2),
     mark3 NUMBER(5,2),
     total NUMBER(5,2),
-    GPA NUMBER(5,2)
+    GPA NUMBER(3,2)
 );
 
 
 
 ------->STUDENT MARKS
 
-INSERT INTO STUDENTMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
+INSERT INTO STUDENTMMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
 ('1MS201', 'Rohit Sharma', TO_DATE('2000-05-15', 'YYYY-MM-DD'), 'Computer Science', 85.5, 78.0, 92.5, 256.0, 8.53);
 
-INSERT INTO STUDENTMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
+INSERT INTO STUDENTMMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
 ('1MS202', 'Anita Verma', TO_DATE('2001-01-20', 'YYYY-MM-DD'), 'Electronics', 79.0, 85.5, 88.5, 253.0, 8.43);
 
-INSERT INTO STUDENTMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
+INSERT INTO STUDENTMMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
 ('1MS203', 'Vijay Patil', TO_DATE('2000-09-10', 'YYYY-MM-DD'), 'Mechanical', 88.5, 82.0, 90.0, 260.5, 8.68);
 
-INSERT INTO STUDENTMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
+INSERT INTO STUDENTMMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
 ('1MS204', 'Sneha Singh', TO_DATE('2001-03-25', 'YYYY-MM-DD'), 'Civil', 91.0, 89.5, 87.0, 267.5, 8.92);
 
-INSERT INTO STUDENTMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
+INSERT INTO STUDENTMMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
 ('1MS205', 'Lakshmi Rao', TO_DATE('2000-11-05', 'YYYY-MM-DD'), 'Electrical', 84.5, 90.0, 85.5, 260.0, 8.67);
 
-INSERT INTO STUDENTMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
+INSERT INTO STUDENTMMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3, total, GPA) VALUES
 ('1MS206', 'Rahul Iyer', TO_DATE('2001-07-12', 'YYYY-MM-DD'), 'Chemical', 86.0, 83.5, 91.5, 261.0, 8.70);
 
 
@@ -219,17 +247,15 @@ INSERT INTO STUDENTMARKS (USN, name, date_of_birth, branch, mark1, mark2, mark3,
 
 
 
-
-
-
+7. Execute the following queries:
+a. Find the GPA score of all the students.
+b. Find the students who born on a particular year of birth from the date_of_birth column.
 
 
 7a
 
-
 UPDATE STUDENT
 SET GPA = (Mark1 + Mark2 + Mark3) / 30;
-
 
 
 7b
@@ -238,6 +264,12 @@ SELECT Name, Date_of_birth
 FROM STUDENT
 WHERE YEAR(Date_of_birth) = 2000;  -- Replace 2000 with the desired year.
 
+
+
+
+
+8. a. List the students who are studying in a particular branch of study.
+b. Find the maximum GPA score of the student branch-wise.
 
 8a
 
